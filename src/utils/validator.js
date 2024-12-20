@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const validateUserInput = (data) => {
+export const validateUserInput = (data) => {
   const schema = Joi.object({
     username: Joi.string().min(3).max(30).required().messages({
       "string.empty": "User name is required.",
@@ -22,4 +22,42 @@ const validateUserInput = (data) => {
   return schema.validate(data, { abortEarly: false });
 };
 
-export default validateUserInput;
+const validCategories = [
+  "Groceries",
+  "Leisure",
+  "Electronics",
+  "Utilities",
+  "Clothing",
+  "Health",
+  "Others",
+];
+
+export const expenseValidationSchema = Joi.object({
+  title: Joi.string().max(255).required().messages({
+    "string.base": "Title must be a string.",
+    "string.empty": "Title cannot be empty.",
+    "string.max": "Title must not exceed 255 characters.",
+    "any.required": "Title is required.",
+  }),
+
+  description: Joi.string().required().messages({
+    "string.base": "Description must be a string.",
+    "string.empty": "Description cannot be empty.",
+    "any.required": "Description is required.",
+  }),
+
+  category: Joi.string()
+    .valid(...validCategories)
+    .required()
+    .messages({
+      "any.only": `Category must be one of ${validCategories.join(", ")}.`,
+      "any.required": "Category is required.",
+    }),
+
+  amount: Joi.number().precision(2).positive().required().messages({
+    "number.base": "Amount must be a number.",
+    "number.positive": "Amount must be greater than zero.",
+    "number.precision": "Amount must have at most 2 decimal places.",
+    "any.required": "Amount is required.",
+  }),
+});

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import pool from "../utils/db.js";
-import validateUserInput from "../utils/validator.js";
+import { validateUserInput } from "../utils/validator.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res) => {
