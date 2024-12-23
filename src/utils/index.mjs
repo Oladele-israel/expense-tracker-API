@@ -1,29 +1,21 @@
 import "dotenv/config";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const api_key = process.env.AI_KEY;
+const api_key = "AIzaSyAH3zQ30ZIBQiRFQ_AR13HAHEC_7LQ1Q6g";
 
-const openai = new OpenAI({
-  apiKey: api_key,
-});
+const genAI = new GoogleGenerativeAI(api_key);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export const getExpenseCategory = async (description) => {
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        {
-          role: "user",
-          content: `Categorize the following expense description: "${description}"`,
-        },
-      ],
-      max_tokens: 10,
-      temperature: 0.5,
-    });
-    console.log(response);
-
-    return response.choices[0].message.content.trim();
+    const result = await model.generateContent(
+      `You are a helpful assistant categorize this description: ${description}, based on the following categories: Groceries','Leisure','Electronics','Utilities','Clothing','Health','Others`
+    );
+    const textResponse = result.response.text();
+    const formattedText =
+      textResponse.charAt(0).toUpperCase() +
+      textResponse.slice(1).toLowerCase();
+    return formattedText;
   } catch (error) {
     console.error("Error predicting category:", error);
     throw new Error("Failed to predict category");

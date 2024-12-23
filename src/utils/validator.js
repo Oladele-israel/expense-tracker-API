@@ -67,7 +67,7 @@ export const budgetSchema = Joi.object({
     .valid(...validCategories)
     .required()
     .messages({
-      "any.only": `Category must be one of ${validCategories.join(", ")}.`,
+      "any.only": `Category must be one of ${validCategories.join(", ")}`,
       "any.required": "Category is required.",
     }),
 

@@ -13,25 +13,15 @@ export const createExpense = async (req, res) => {
   if (!category) {
     try {
       expenseCategory = await getExpenseCategory(description);
+      console.log("this is the expense category-->", expenseCategory);
     } catch (error) {
       return res.status(500).json({ error: "Failed to categorize expense" });
     }
   }
-
-  const { error } = expenseValidationSchema.validate({
-    title,
-    description,
-    category: expenseCategory,
-    amount,
-  });
-
-  if (error) {
-    return res.status(400).json({ error: error.details[0].message });
-  }
-
+  expenseCategory = expenseCategory?.trim();
   try {
     const query = `
-          INSERT INTO expenses (user_id, title, description, category, amount)
+          INSERT INTO expense (user_id, title, description, category, amount)
           VALUES ($1, $2, $3, $4, $5)
           RETURNING *;
       `;

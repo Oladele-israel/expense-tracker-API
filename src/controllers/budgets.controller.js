@@ -124,3 +124,29 @@ export const deleteBudget = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// Get the total budget for all categories
+export const getTotalBudget = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    // Query to calculate the sum of all budget amounts for the user
+    const query = `
+      SELECT COALESCE(SUM(amount), 0) AS total_budget 
+      FROM budgets 
+      WHERE user_id = $1;
+    `;
+    const result = await pool.query(query, [userId]);
+
+    // Extract the total budget from the query result
+    const totalBudget = result.rows[0].total_budget;
+
+    res.status(200).json({
+      success: true,
+      totalBudget,
+    });
+  } catch (err) {
+    console.error("Error fetching total budget:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
