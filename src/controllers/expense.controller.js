@@ -1,41 +1,58 @@
 import pool from "../utils/db.js";
+import { getExpenseCategory } from "../utils/index.mjs";
 import { expenseValidationSchema } from "../utils/validator.js";
 
+// Create an expense
 export const createExpense = async (req, res) => {
   const { title, description, category, amount } = req.body;
-  const userId = req.user.id;
+  const user_id = req.user.id;
+  const budget = req.budget;
+
+  let expenseCategory = category;
+
+  if (!category) {
+    try {
+      expenseCategory = await getExpenseCategory(description);
+    } catch (error) {
+      return res.status(500).json({ error: "Failed to categorize expense" });
+    }
+  }
 
   const { error } = expenseValidationSchema.validate({
     title,
     description,
-    category,
+    category: expenseCategory,
     amount,
   });
 
   if (error) {
-    return res.status(400).json({
-      error: error.details[0].message,
-    });
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   try {
     const query = `
-      INSERT INTO expense (user_id, title, description, category, amount)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING *;
-    `;
+          INSERT INTO expenses (user_id, title, description, category, amount)
+          VALUES ($1, $2, $3, $4, $5)
+          RETURNING *;
+      `;
+    const values = [user_id, title, description, expenseCategory, amount];
+    const expenseResult = await pool.query(query, values);
 
-    const values = [userId, title, description, category, amount];
+    const updateBudgetQuery =
+      "UPDATE budgets SET amount = amount - $1 WHERE id = $2 RETURNING *;";
+    const updatedBudget = await pool.query(updateBudgetQuery, [
+      amount,
+      budget.id,
+    ]);
 
-    const result = await pool.query(query, values);
     res.status(201).json({
-      success: true,
-      message: "Expense added successfully",
-      expense: result.rows[0],
+      message: "Expense recorded and budget updated",
+      expense: expenseResult.rows[0],
+      updatedBudget: updatedBudget.rows[0],
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal server error" });
+  } catch (error) {
+    console.error("Error recording expense:", error);
+    res.status(500).json({ error: "Error recording expense" });
   }
 };
 

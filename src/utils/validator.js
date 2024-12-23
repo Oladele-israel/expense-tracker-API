@@ -61,3 +61,20 @@ export const expenseValidationSchema = Joi.object({
     "any.required": "Amount is required.",
   }),
 });
+
+export const budgetSchema = Joi.object({
+  category: Joi.string()
+    .valid(...validCategories)
+    .required()
+    .messages({
+      "any.only": `Category must be one of ${validCategories.join(", ")}.`,
+      "any.required": "Category is required.",
+    }),
+
+  amount: Joi.number().precision(2).positive().required().messages({
+    "number.base": "Amount must be a number.",
+    "number.positive": "Amount must be greater than zero.",
+    "number.precision": "Amount must have at most 2 decimal places.",
+    "any.required": "Amount is required.",
+  }),
+});
