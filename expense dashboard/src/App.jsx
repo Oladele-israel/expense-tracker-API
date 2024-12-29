@@ -5,9 +5,9 @@ import Summary from "./components/Summary";
 const App = () => {
   return (
     <>
-      <div className="flex flex-col w-full ml-[17rem] ">
+      <div className="flex flex-col w-full md:ml-[17rem] ">
         <DashboardHeader />
-        <div className="w-full flex mb-10 gap-5">
+        <div className="w-full flex flex-col md:flex-row mb-10 gap-5">
           <Summary />
           <AiSuggestion />
         </div>

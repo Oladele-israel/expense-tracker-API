@@ -29,7 +29,7 @@ const SideNav = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   return (
-    <aside className="w-[250px] min-h-screen bg-[#ffff] flex flex-col justify-between fixed left-0 top-0">
+    <aside className="w-[250px] min-h-screen bg-[#ffff] md:flex flex-col justify-between fixed left-0 top-0 hidden">
       <div>
         <Logo />
         <div className="flex flex-col items-center gap-4 mx-auto">
