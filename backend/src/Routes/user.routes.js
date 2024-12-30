@@ -1,5 +1,10 @@
 import express from "express";
-import { signup, login, logout } from "../controllers/user.controller.js";
+import {
+  signup,
+  login,
+  logout,
+  validateToken,
+} from "../controllers/user.controller.js";
 import { checkAndRenewToken } from "../middleware/validateToken.js";
 
 const userRouter = express.Router();
@@ -7,5 +12,6 @@ const userRouter = express.Router();
 userRouter.post("/signup", signup);
 userRouter.post("/login", login);
 userRouter.get("/logout", checkAndRenewToken, logout);
+userRouter.get("/validateUser", checkAndRenewToken, validateToken);
 
 export default userRouter;

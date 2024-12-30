@@ -1,9 +1,12 @@
 import infinity from "../assets/images/infinity.png";
-import { Lock, Mail, User, LogIn } from "lucide-react";
+import { Lock, Mail, LogIn } from "lucide-react";
 const Login = () => {
   return (
     <section className="bg-gradient-to-r from-[#080357] to-[#0A2FB9] min-h-screen w-screen flex justify-center items-center shadow-lg ">
-      <form className="md:w-[500px] h-[600px] bg-white rounded-xl md:rounded-l-3xl p-7 flex flex-col justify-center gap-6 shadow-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="md:w-[500px] h-[600px] bg-white rounded-xl md:rounded-l-3xl p-7 flex flex-col justify-center gap-6 shadow-lg"
+      >
         <img src={infinity} alt="" width={100} className="ml-auto mr-auto" />
 
         {/* Email Field */}

@@ -14,12 +14,13 @@ app.use(cookieParser());
 
 const PORT = process.env.PORT;
 
-// app.use(
-//   cors({
-//     origin: ["http://localhost:3000", "https://your-production-domain.com"],
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-//     credentials: true,
-//   })
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://your-production-domain.com"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.json({ message: "Server is running successfully!" });

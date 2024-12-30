@@ -1,13 +1,14 @@
 import bcrypt from "bcryptjs";
 import pool from "../utils/db.js";
 import { validateUserInput } from "../utils/validator.js";
+
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    if (!username || !email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({
         message: "all field must be entered!",
       });
@@ -22,7 +23,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    const { error, value } = validateUserInput({ username, email, password });
+    const { error, value } = validateUserInput({ name, email, password });
 
     if (error) {
       const errorMessages = error.details.map((err) => err.message);
@@ -31,8 +32,8 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await pool.query(
-      "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
-      [username, email, hashedPassword]
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
+      [name, email, hashedPassword]
     );
 
     return res
@@ -61,7 +62,7 @@ export const login = async (req, res) => {
 
   try {
     const result = await pool.query(
-      "SELECT id, username, email, password FROM users WHERE email = $1",
+      "SELECT id, name, email, password FROM users WHERE email = $1",
       [email]
     );
 
@@ -85,7 +86,7 @@ export const login = async (req, res) => {
 
     const accessToken = jwt.sign(
       {
-        access1: user.username,
+        access1: user.name,
         access2: user.id,
       },
       process.env.ACCESS_TOKEN_SECRET,
@@ -96,7 +97,7 @@ export const login = async (req, res) => {
 
     const refreshToken = jwt.sign(
       {
-        access1: user.username,
+        access1: user.name,
         access2: user.id,
       },
       process.env.REFRESH_TOKEN_SECRET,
@@ -130,7 +131,7 @@ export const login = async (req, res) => {
       message: "user logged in successfully",
       user: {
         id: user.id,
-        username: user.username,
+        name: user.name,
         email: user.email,
       },
     });
@@ -163,6 +164,15 @@ export const logout = async (req, res) => {
       .status(500)
       .json({ success: false, message: "Internal server error" });
   }
+};
+
+export const validateToken = (req, res) => {
+  const authUser = req.user;
+  res.status(200).json({
+    success: true,
+    message: "Authorized",
+    authUser: authUser,
+  });
 };
 
 // write the update function
