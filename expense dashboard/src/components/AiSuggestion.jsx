@@ -2,7 +2,7 @@ import { Brain } from "lucide-react";
 
 const AiSuggestion = () => {
   return (
-    <section className="bg-gradient-to-br from-white via-gray-100 to-gray-100 shadow-lg w-[32%] h-[800px] mt-10 rounded-xl mr-2 p-6 flex flex-col">
+    <section className="bg-gradient-to-br from-white via-gray-100 to-gray-100 shadow-lg md:w-[32%] h-[800px] mt-10 rounded-xl mr-2 p-6 flex flex-col">
       {/* Header */}
       <div className="flex items-center mb-6">
         <div className="bg-[#551FFF] text-white rounded-full p-3 shadow-md">

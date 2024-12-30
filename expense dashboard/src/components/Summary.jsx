@@ -44,10 +44,10 @@ const firstData = [
 
 const Summary = () => {
   return (
-    <div className="flex flex-col w-[80%]">
+    <div className="flex flex-col md:w-[80%] p-2 md:p-0 overflow-hidden">
       {/* First summary */}
-      <div className="bg-white w-full h-[150px] mt-10 rounded-xl p-6">
-        <div className="flex justify-between">
+      <div className="bg-white w-full mt-10 rounded-xl p-6 md:p-8 lg:p-10 ">
+        <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:justify-between lg:gap-8">
           {firstData.map((data, index) => (
             <FirstSummary
               key={index}
@@ -61,16 +61,16 @@ const Summary = () => {
       </div>
 
       {/* Second summary with charts */}
-      <div className="bg-white w-full h-[500px] mt-10 rounded-xl p-10 flex flex-col gap-2">
-        <div className="text-xl font-bold capitalize">
+      <div className="bg-white w-full h-[500px] mt-10 rounded-xl p-2 md:p-10 flex flex-col gap-2">
+        <div className=" text-base md:text-xl font-bold capitalize">
           expense for the past 6 months
         </div>
         <Charts />
       </div>
 
       {/* Third cards with budget category */}
-      <div className="flex gap-6">
-        <div className="bg-white w-[50%] h-[403px] mt-10 rounded-xl p-6 flex">
+      <div className="flex gap-6 flex-col md:flex-row">
+        <div className="bg-white md:w-[50%] h-[403px] mt-10 rounded-xl p-6 flex">
           {/* Left Section: Category List */}
           <div className="w-[50%] flex flex-col justify-center">
             <div className="text-lg font-bold mb-4">Budget Category</div>
@@ -96,11 +96,11 @@ const Summary = () => {
           </div>
 
           {/* Right Section: Budget Chart */}
-          <div className="w-[50%]">
+          <div className=" w-[70%] md:w-[50%]">
             <BudgetChart />
           </div>
         </div>
-        <div className="bg-white w-[50%] h-[403px] mt-10 rounded-xl shadow-md flex flex-col">
+        <div className="bg-white md:w-[50%] h-[403px] mt-10 rounded-xl shadow-md flex flex-col">
           {/* Filter Section */}
           <div className="flex justify-between p-5 border-b border-gray-200">
             <div className="text-center capitalize font-bold text-gray-800">
@@ -144,4 +144,3 @@ const Summary = () => {
 };
 
 export default Summary;
-<SlidersHorizontal />;
