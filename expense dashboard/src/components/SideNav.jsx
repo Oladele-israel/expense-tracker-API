@@ -1,23 +1,28 @@
 import { useState } from "react";
 import Logo from "../components/Logo.jsx";
 import { UserPen, HandCoins, Bitcoin, Brain, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const sidenavLinks = [
   {
     icon: UserPen,
     desc: "Profile",
+    link: "/profile",
   },
   {
     icon: HandCoins,
     desc: "Expenses",
+    link: "/expense",
   },
   {
     icon: Bitcoin,
     desc: "Budget",
+    link: "/budget",
   },
   {
     icon: Brain,
     desc: "Insights",
+    link: "/insights",
   },
   {
     icon: LogOut,
@@ -38,7 +43,8 @@ const SideNav = () => {
             {sidenavLinks.slice(0, -1).map((link, index) => {
               const Icon = link.icon;
               return (
-                <div
+                <Link
+                  to={link.link}
                   key={index}
                   onClick={() => setActiveIndex(index)}
                   className={`flex items-center gap-4 w-[225px] justify-center p-5 rounded-full text-[20px] cursor-pointer transition-all ease-in-out duration-300 ${
@@ -49,7 +55,7 @@ const SideNav = () => {
                 >
                   <Icon />
                   <div>{link.desc}</div>
-                </div>
+                </Link>
               );
             })}
           </div>

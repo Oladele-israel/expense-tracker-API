@@ -8,6 +8,10 @@ import Signup from "./pages/signup.jsx";
 import Login from "./pages/Login.jsx";
 import { AuthContextProvider } from "./Hooks/authContext.jsx";
 import ProtectedRoute from "./Hooks/protectedRoute.jsx";
+import Budget from "./pages/Budget.jsx";
+import Expense from "./pages/Expense.jsx";
+import Profile from "./pages/Profile.jsx";
+import Insights from "./pages/Insights.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +25,22 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: "/budget",
+        element: <Budget />,
+      },
+      {
+        path: "/expense",
+        element: <Expense />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/insights",
+        element: <Insights />,
       },
     ],
   },
