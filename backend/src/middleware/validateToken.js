@@ -73,7 +73,7 @@ export const checkAndRenewToken = async (req, res, next) => {
 
     if (userId) {
       const userResult = await pool.query(
-        "SELECT id, name, email FROM users WHERE id = $1",
+        "SELECT  name, email FROM users WHERE id = $1",
         [userId]
       );
       const user = userResult.rows[0];
