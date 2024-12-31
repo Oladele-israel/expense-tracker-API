@@ -10,25 +10,30 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Explicit state
 
-  // Define the base URL as an environment variable for flexibility
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const validateToken = async () => {
-      setLoading(true); // Ensure loading is true at the start of the call
+      setLoading(true);
       try {
-        const { data } = await axios.get(`${API_BASE_URL}/user/validateToken`, {
+        const { data } = await axios.get(`${API_BASE_URL}/user/validateUser`, {
           withCredentials: true,
         });
 
+        console.log("this is the user", data);
+
         if (data?.success) {
-          setUserDetails(data.userDetail);
+          setUserDetails(data.authUser);
+          setIsAuthenticated(true); // Set authenticated state
           setMessage(data.message || "Token validated successfully.");
         } else {
+          setIsAuthenticated(false); // Not authenticated
           setMessage("Validation of token did not work.");
         }
       } catch (err) {
+        setIsAuthenticated(false); // Handle errors as unauthenticated
         if (axios.isAxiosError(err)) {
           setError(
             err.response?.data?.message ||
@@ -38,16 +43,24 @@ export const AuthContextProvider = ({ children }) => {
           setError("An unexpected error occurred.");
         }
       } finally {
-        setLoading(false); // Ensure loading stops regardless of success or error
+        setLoading(false);
       }
     };
 
     validateToken();
-  }, [API_BASE_URL]); // Ensure dependency array includes dynamic values
+  }, [API_BASE_URL]);
 
   return (
     <AuthContext.Provider
-      value={{ userDetails, setUserDetails, loading, message, error }}
+      value={{
+        userDetails,
+        setUserDetails,
+        loading,
+        message,
+        error,
+        isAuthenticated,
+        setIsAuthenticated,
+      }}
     >
       {children}
     </AuthContext.Provider>

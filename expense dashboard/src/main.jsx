@@ -6,11 +6,17 @@ import "./index.css";
 import App from "./App.jsx"; // Ensure the correct relative path
 import Signup from "./pages/signup.jsx";
 import Login from "./pages/Login.jsx";
+import { AuthContextProvider } from "./Hooks/authContext.jsx";
+import ProtectedRoute from "./Hooks/protectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -30,6 +36,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </StrictMode>
 );
