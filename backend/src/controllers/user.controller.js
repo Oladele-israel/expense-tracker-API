@@ -176,3 +176,4 @@ export const validateToken = (req, res) => {
 };
 
 // write the update function
+pg_dump -U postgres -h localhost -p 9090  postgres > local_database_dump.sql
