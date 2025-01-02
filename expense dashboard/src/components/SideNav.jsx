@@ -36,7 +36,7 @@ const SideNav = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="w-[250px] min-h-screen bg-[#ffff] md:flex flex-col justify-between fixed left-0 top-0 hidden">
+      <aside className="w-[250px] min-h-screen bg-[#ffff] lg:flex flex-col justify-between fixed left-0 top-0 hidden">
         <div>
           <Logo />
           <div className="flex flex-col items-center gap-4 mx-auto">
@@ -71,7 +71,7 @@ const SideNav = () => {
 
       {/* Mobile Navbar */}
       <nav
-        className="fixed bottom-0 left-0 w-full flex justify-between items-center px-6 py-4 shadow-lg md:hidden "
+        className="fixed bottom-0 left-0 w-full flex justify-between items-center px-6 py-4 shadow-lg lg:hidden "
         style={{
           background: "rgba(255, 255, 255, 0.2)",
           backdropFilter: "blur(10px)",

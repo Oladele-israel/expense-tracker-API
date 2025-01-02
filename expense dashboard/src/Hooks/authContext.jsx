@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Explicit state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -26,14 +26,14 @@ export const AuthContextProvider = ({ children }) => {
 
         if (data?.success) {
           setUserDetails(data.authUser);
-          setIsAuthenticated(true); // Set authenticated state
+          setIsAuthenticated(true);
           setMessage(data.message || "Token validated successfully.");
         } else {
-          setIsAuthenticated(false); // Not authenticated
+          setIsAuthenticated(false);
           setMessage("Validation of token did not work.");
         }
       } catch (err) {
-        setIsAuthenticated(false); // Handle errors as unauthenticated
+        setIsAuthenticated(false);
         if (axios.isAxiosError(err)) {
           setError(
             err.response?.data?.message ||

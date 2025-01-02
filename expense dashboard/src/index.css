@@ -5,3 +5,63 @@
 body {
   background-color: #f5f5f7;
 }
+
+/* Skeleton container styles */
+.skeleton-dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.skeleton-sidebar {
+  width: 20%;
+  background-color: #e0e0e0;
+  margin-right: 1rem;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-content {
+  flex: 1;
+  padding: 1rem;
+}
+
+.skeleton-header {
+  height: 100px;
+  background-color: #e0e0e0;
+  margin-bottom: 1rem;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-cards {
+  display: flex;
+  gap: 1rem;
+}
+
+.skeleton-card {
+  flex: 1;
+  height: 180px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-div {
+  flex: 1;
+  height: 450px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #d6d6d6;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}

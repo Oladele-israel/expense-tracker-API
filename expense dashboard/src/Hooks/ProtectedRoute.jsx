@@ -1,11 +1,31 @@
 import { useAuthContext } from "./authContext";
 import { Navigate } from "react-router-dom";
 
+const SkeletonDashboard = () => {
+  return (
+    <div className="skeleton-dashboard">
+      <div className="skeleton-sidebar"></div>
+      <div className="skeleton-content">
+        <div className="skeleton-header "></div>
+        <div className="skeleton-cards">
+          <div className="skeleton-card"></div>
+          <div className="skeleton-card"></div>
+          <div className="skeleton-card"></div>
+        </div>
+        <div className="skeleton-cards mt-10 ">
+          <div className="skeleton-div"></div>
+          <div className="skeleton-div"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuthContext();
 
   if (loading) {
-    return <div>Loading...</div>; // Optionally add a spinner
+    return <SkeletonDashboard />;
   }
 
   if (!isAuthenticated) {

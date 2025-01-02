@@ -7,6 +7,7 @@ import App from "./App.jsx"; // Ensure the correct relative path
 import Signup from "./pages/signup.jsx";
 import Login from "./pages/Login.jsx";
 import { AuthContextProvider } from "./Hooks/authContext.jsx";
+import { DashboardContextProvider } from "./Hooks/dashboardContext.jsx";
 import ProtectedRoute from "./Hooks/protectedRoute.jsx";
 import Budget from "./pages/Budget.jsx";
 import Expense from "./pages/Expense.jsx";
@@ -17,9 +18,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoute>
-        <DashboardLayout />
-      </ProtectedRoute>
+      <AuthContextProvider>
+        <ProtectedRoute>
+          <DashboardContextProvider>
+            <DashboardLayout />
+          </DashboardContextProvider>
+        </ProtectedRoute>
+      </AuthContextProvider>
     ),
     children: [
       {
@@ -56,8 +61,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <RouterProvider router={router} />
   </StrictMode>
 );

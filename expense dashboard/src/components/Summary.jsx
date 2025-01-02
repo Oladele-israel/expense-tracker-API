@@ -18,19 +18,19 @@ const budgetData = [
 const firstData = [
   {
     icon: paper,
-    desc: "Projects",
+    desc: "Expenditure",
     num: 7,
     bg: "#FFF2E9",
   },
   {
     icon: Swap,
-    desc: "Budgets",
+    desc: "Total-Budgets",
     num: 7,
     bg: "#EDE8FF",
   },
   {
     icon: Profile,
-    desc: "Total Expense",
+    desc: "No of users",
     num: 7,
     bg: "#EAF9FF",
   },
