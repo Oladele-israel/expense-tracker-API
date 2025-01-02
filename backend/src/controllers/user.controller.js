@@ -175,5 +175,7 @@ export const validateToken = (req, res) => {
   });
 };
 
-// write the update function
-pg_dump -U postgres -h localhost -p 9090  postgres > local_database_dump.sql
+// // write the update function
+// pg_dump -U postgres -h localhost -p 9090  postgres > local_database_dump.sql
+
+// psql "postgresql://postgres_9gle_user:G9pAvxewJSXOOiKbfDW8AZYW6SNm0wvr@dpg-ctps2jq3esus73dkquhg-a.oregon-postgres.render.com/postgres_9gle"

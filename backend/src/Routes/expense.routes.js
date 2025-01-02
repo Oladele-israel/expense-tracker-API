@@ -6,6 +6,7 @@ import {
   updateExpense,
   deleteExpense,
   filterExpenses,
+  getTotalExpenses,
 } from "../controllers/expense.controller.js";
 import { checkAndRenewToken } from "../middleware/validateToken.js";
 import { checkBudgetMiddleware } from "../middleware/checkbudgetMiddleware.js";
@@ -18,6 +19,7 @@ expenseRouter.post(
   createExpense
 );
 expenseRouter.get("/", checkAndRenewToken, getExpenses);
+expenseRouter.get("/total", checkAndRenewToken, getTotalExpenses);
 expenseRouter.put("/:id", checkAndRenewToken, updateExpense);
 expenseRouter.delete("/:id", checkAndRenewToken, deleteExpense);
 expenseRouter.get("/filter", checkAndRenewToken, filterExpenses);

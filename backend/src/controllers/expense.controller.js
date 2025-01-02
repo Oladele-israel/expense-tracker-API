@@ -192,3 +192,22 @@ export const filterExpenses = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const getTotalExpenses = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const query = `SELECT SUM(amount) AS total_expenses FROM expense WHERE user_id = $1;`;
+    const result = await pool.query(query, [userId]);
+
+    const totalExpenses = result.rows[0]?.total_expenses || 0; // Default to 0 if no expenses
+
+    res.status(200).json({
+      success: true,
+      totalExpenses,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

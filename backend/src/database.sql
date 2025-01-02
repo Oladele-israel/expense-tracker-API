@@ -37,14 +37,3 @@ CREATE TABLE budgets (
 SELECT * FROM Budgets;
 
 
-pg_dump -U postgres -h localhost -d expensetrackerdb -F c -b -v -f local_database.dump
-
-
-postgresql://postgres_9gle_user:G9pAvxewJSXOOiKbfDW8AZYW6SNm0wvr@dpg-ctps2jq3esus73dkquhg-a.oregon-postgres.render.com/postgres_9gle
-
-postgres://postgres_9gle_user:G9pAvxewJSXOOiKbfDW8AZYW6SNm0wvr@dpg:5432/postgres_9gle
-
-
-
-
-pg_restore -U postgres_9gle_user -h dpg-ctps2jq3esus73dkquhg-a -d postgres_9gle -v local_database.dump
