@@ -37,7 +37,6 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log("Login successful:", data);
 
       if (data.success) {
         setUserDetails(data.user);

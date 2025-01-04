@@ -34,7 +34,6 @@ export const CreateExpenseForm = () => {
       console.log("Expense submitted successfully:", response.data);
       alert("Expense created successfully!");
 
-      // Reset form fields after successful submission
       setFormData({ title: "", description: "", amount: "" });
     } catch (error) {
       console.error(
@@ -54,7 +53,6 @@ export const CreateExpenseForm = () => {
     >
       <h2 className="text-lg font-semibold mb-4">Create Expense</h2>
 
-      {/* Title */}
       <div className="mb-4">
         <label className="block mb-2 text-sm font-medium" htmlFor="title">
           Title
@@ -70,7 +68,6 @@ export const CreateExpenseForm = () => {
         />
       </div>
 
-      {/* Description */}
       <div className="mb-4">
         <label className="block mb-2 text-sm font-medium" htmlFor="description">
           Description
@@ -86,7 +83,6 @@ export const CreateExpenseForm = () => {
         />
       </div>
 
-      {/* Amount */}
       <div className="mb-4">
         <label className="block mb-2 text-sm font-medium" htmlFor="amount">
           Amount
@@ -102,7 +98,6 @@ export const CreateExpenseForm = () => {
         />
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 active:bg-blue-700"

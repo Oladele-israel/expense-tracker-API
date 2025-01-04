@@ -25,9 +25,7 @@ const Summary = () => {
     expenses = [],
   } = useDashboardContext();
 
-  useEffect(() => {
-    console.log("Total Budget from Context:", totalBudget);
-  }, [totalBudget]);
+  useEffect(() => {}, [totalBudget]);
 
   const firstData = [
     {

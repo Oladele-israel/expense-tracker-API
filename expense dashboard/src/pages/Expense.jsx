@@ -55,10 +55,7 @@ const ExpenseManager = () => {
           }
         );
 
-        console.log("Expense submitted successfully:", response.data);
         alert("Expense created successfully!");
-
-        // Reset form fields after successful submission
         setFormData({ title: "", description: "", amount: "" });
       } catch (error) {
         console.error(

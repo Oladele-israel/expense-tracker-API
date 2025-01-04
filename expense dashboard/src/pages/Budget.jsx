@@ -31,8 +31,6 @@ const BudgetApp = () => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-
     if (!formData.category || !formData.amount) {
       setMessage("All fields are required.");
       return;
@@ -53,7 +51,6 @@ const BudgetApp = () => {
         }
       );
 
-      // Add the new expense to the table
       setbudget((prev) => [...prev, response.data]);
 
       setMessage("Budget created successfully!");

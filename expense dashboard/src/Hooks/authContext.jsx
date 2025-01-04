@@ -22,8 +22,6 @@ export const AuthContextProvider = ({ children }) => {
           withCredentials: true,
         });
 
-        console.log("this is the user", data);
-
         if (data?.success) {
           setUserDetails(data.authUser);
           setIsAuthenticated(true);

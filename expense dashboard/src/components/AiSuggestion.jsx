@@ -6,19 +6,16 @@ import Loader from "../components/Loader.jsx";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AiSuggestion = () => {
-  // State to store the AI suggestion response
   const [aiResponse, setAiResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Function to fetch AI insights
   const fetchAIInsights = async () => {
     try {
-      setLoading(true); // Start loading when button is clicked
+      setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/user/ai`, {
-        withCredentials: true, // Pass credentials in the config object
+        withCredentials: true,
       });
-      console.log("this is the ai --->", response);
       setAiResponse(response.data.insights);
     } catch (err) {
       setError("Error fetching AI insights");
@@ -55,7 +52,7 @@ const AiSuggestion = () => {
           ) : error ? (
             <div className="text-red-500">{error}</div>
           ) : (
-            <div>{aiResponse}</div> // Display AI response
+            <div>{aiResponse}</div>
           )}
         </div>
       </div>
@@ -64,7 +61,7 @@ const AiSuggestion = () => {
       <div className="mt-6 text-center">
         <button
           className="px-6 py-2 bg-[#551FFF] text-white rounded-full shadow-md hover:bg-[#3A13CC]"
-          onClick={fetchAIInsights} // Refetch data on button click
+          onClick={fetchAIInsights}
         >
           Explore More
         </button>

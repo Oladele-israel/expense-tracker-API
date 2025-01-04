@@ -10,7 +10,7 @@ export const DashboardContextProvider = ({ children }) => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
   const [expenses, setExpenses] = useState(null);
-  const [totalBudget, setTotalBudget] = useState(null); // Default to null for clarity
+  const [totalBudget, setTotalBudget] = useState(null);
   const [budgets, setBudgets] = useState([]);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -22,7 +22,6 @@ export const DashboardContextProvider = ({ children }) => {
 
       setLoadBudget(true);
       try {
-        console.log("Fetching dashboard data...");
         const [totalBudgetResponse, budgetsResponse, expenseResponse] =
           await Promise.all([
             axios.get(`${API_BASE_URL}/budgets/total`, {
@@ -39,14 +38,6 @@ export const DashboardContextProvider = ({ children }) => {
             }),
           ]);
 
-        console.log(
-          "Total Budget Response:",
-          totalBudgetResponse.data.totalBudget
-        );
-        console.log("Budgets Response:", budgetsResponse.data);
-        console.log("expenseData====> ", expenseResponse.data.expenses);
-
-        // Update state
         setTotalBudget(totalBudgetResponse.data.totalBudget);
         setBudgets(budgetsResponse.data.budgets);
         setExpenses(expenseResponse.data.expenses);
