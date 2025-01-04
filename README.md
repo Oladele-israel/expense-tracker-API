@@ -96,8 +96,6 @@ Create a secure account to save and access your expense data anytime, anywhere.
 Log Expenses
 Add income and expense entries with just a few clicks.
 
-
-
 ✨ want me on your project!
 Feel free to reach out to me on mail.
 
