@@ -6,8 +6,8 @@ import Profile from "../assets/images/Profile.svg";
 import Charts from "./Charts";
 import BudgetChart from "./budgetChart";
 import { SlidersHorizontal } from "lucide-react";
-import { useDashboardContext } from "../Hooks/dashboardContext";
-import Loader from "./Loader";
+import { useDashboardContext } from "../Hooks/dashboardContext.jsx";
+import Loader from "./Loader.jsx";
 
 const budgetData = [
   { name: "Leisure", percentage: "25%", color: "#4CAF50" },
