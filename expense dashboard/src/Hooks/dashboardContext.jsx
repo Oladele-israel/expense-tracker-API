@@ -22,6 +22,7 @@ export const DashboardContextProvider = ({ children }) => {
 
       setLoadBudget(true);
       try {
+        console.log("Fetching dashboard data...");
         const [totalBudgetResponse, budgetsResponse, expenseResponse] =
           await Promise.all([
             axios.get(`${API_BASE_URL}/budgets/total`, {
