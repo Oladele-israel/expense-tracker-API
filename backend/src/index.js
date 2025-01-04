@@ -16,7 +16,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://your-production-domain.com"],
+    origin: ["http://localhost:5173", "https://limitless-xpnx.vercel.app"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
