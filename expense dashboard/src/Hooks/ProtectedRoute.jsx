@@ -1,4 +1,4 @@
-import { useAuthContext } from "./authContext";
+import { useAuthContext } from "./authContext.jsx";
 import { Navigate } from "react-router-dom";
 
 const SkeletonDashboard = () => {
