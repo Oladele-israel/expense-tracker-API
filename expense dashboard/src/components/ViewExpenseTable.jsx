@@ -1,4 +1,4 @@
-const ViewExpensesTable = () => {
+export const ViewExpensesTable = ({ handleModalOpen }) => {
   const expenses = [
     { id: 1, name: "Example Expense", amount: 100, date: "2025-01-01" },
     { id: 2, name: "Another Expense", amount: 200, date: "2025-01-02" },

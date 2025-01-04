@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDashboardContext } from "../Hooks/dashboardContext.jsx";
 import axios from "axios";
+import Loader from "../components/Loader.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -154,9 +155,7 @@ const BudgetApp = () => {
 
         {/* Show a spinner while data is loading */}
         {loadBudget ? (
-          <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-blue-500"></div>
-          </div>
+          <Loader />
         ) : budgets.length === 0 ? (
           <p className="text-gray-500">No budget yet</p>
         ) : (

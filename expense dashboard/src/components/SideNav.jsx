@@ -1,14 +1,12 @@
 import { useState } from "react";
 import Logo from "../components/Logo.jsx";
-import { UserPen, HandCoins, Bitcoin, Brain, LogOut } from "lucide-react";
-import { Link } from "react-router-dom";
+import { HandCoins, Bitcoin, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const sidenavLinks = [
-  {
-    icon: UserPen,
-    desc: "Profile",
-    link: "/profile",
-  },
   {
     icon: HandCoins,
     desc: "Expenses",
@@ -19,11 +17,7 @@ const sidenavLinks = [
     desc: "Budget",
     link: "/budget",
   },
-  {
-    icon: Brain,
-    desc: "Insights",
-    link: "/insights",
-  },
+
   {
     icon: LogOut,
     desc: "Logout",
@@ -32,6 +26,26 @@ const sidenavLinks = [
 
 const SideNav = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const navigate = useNavigate();
+
+  // logout
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/user/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
 
   return (
     <>
@@ -62,10 +76,10 @@ const SideNav = () => {
         </div>
         <div
           className="flex items-center gap-4 w-[225px] justify-center p-5 rounded-full text-[20px] cursor-pointer mx-auto mb-4 text-[#D0D2DA] hover:text-[#551FFF] hover:bg-[#F3F0FF]"
-          onClick={() => setActiveIndex(sidenavLinks.length - 1)}
+          onClick={handleLogout}
         >
           <LogOut />
-          <div>Logout</div>
+          <button>Logout</button>
         </div>
       </aside>
 

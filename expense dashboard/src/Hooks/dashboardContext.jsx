@@ -9,7 +9,7 @@ export const DashboardContextProvider = ({ children }) => {
   const [loadBudget, setLoadBudget] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
-
+  const [expenses, setExpenses] = useState(null);
   const [totalBudget, setTotalBudget] = useState(null); // Default to null for clarity
   const [budgets, setBudgets] = useState([]);
 
@@ -23,23 +23,33 @@ export const DashboardContextProvider = ({ children }) => {
       setLoadBudget(true);
       try {
         console.log("Fetching dashboard data...");
-        const [totalBudgetResponse, budgetsResponse] = await Promise.all([
-          axios.get(`${API_BASE_URL}/budgets/total`, {
-            signal,
-            withCredentials: true,
-          }),
-          axios.get(`${API_BASE_URL}/budgets/`, {
-            signal,
-            withCredentials: true,
-          }),
-        ]);
+        const [totalBudgetResponse, budgetsResponse, expenseResponse] =
+          await Promise.all([
+            axios.get(`${API_BASE_URL}/budgets/total`, {
+              signal,
+              withCredentials: true,
+            }),
+            axios.get(`${API_BASE_URL}/budgets/`, {
+              signal,
+              withCredentials: true,
+            }),
+            axios.get(`${API_BASE_URL}/expense/`, {
+              signal,
+              withCredentials: true,
+            }),
+          ]);
 
-        console.log("Total Budget Response:", totalBudgetResponse.data);
+        console.log(
+          "Total Budget Response:",
+          totalBudgetResponse.data.totalBudget
+        );
         console.log("Budgets Response:", budgetsResponse.data);
+        console.log("expenseData====> ", expenseResponse.data.expenses);
 
         // Update state
-        setTotalBudget(totalBudgetResponse.data.total);
+        setTotalBudget(totalBudgetResponse.data.totalBudget);
         setBudgets(budgetsResponse.data.budgets);
+        setExpenses(expenseResponse.data.expenses);
         setMessage("Dashboard data fetched successfully.");
       } catch (err) {
         if (axios.isAxiosError(err)) {
@@ -68,6 +78,7 @@ export const DashboardContextProvider = ({ children }) => {
         message,
         error,
         totalBudget,
+        expenses,
         budgets,
       }}
     >

@@ -11,20 +11,16 @@ import { DashboardContextProvider } from "./Hooks/dashboardContext.jsx";
 import ProtectedRoute from "./Hooks/protectedRoute.jsx";
 import Budget from "./pages/Budget.jsx";
 import Expense from "./pages/Expense.jsx";
-import Profile from "./pages/Profile.jsx";
-import Insights from "./pages/Insights.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AuthContextProvider>
-        <ProtectedRoute>
-          <DashboardContextProvider>
-            <DashboardLayout />
-          </DashboardContextProvider>
-        </ProtectedRoute>
-      </AuthContextProvider>
+      <ProtectedRoute>
+        <DashboardContextProvider>
+          <DashboardLayout />
+        </DashboardContextProvider>
+      </ProtectedRoute>
     ),
     children: [
       {
@@ -38,14 +34,6 @@ const router = createBrowserRouter([
       {
         path: "/expense",
         element: <Expense />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/insights",
-        element: <Insights />,
       },
     ],
   },
@@ -61,6 +49,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </StrictMode>
 );

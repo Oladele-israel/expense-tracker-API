@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { useEffect, useState } from "react";
 import {
   AreaChart,
   Area,
@@ -8,72 +8,67 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import { useDashboardContext } from "../Hooks/dashboardContext";
+import Loader from "./Loader";
 
 const Charts = () => {
+  const { expenses, loadBudget, error } = useDashboardContext();
+  const [monthlyData, setMonthlyData] = useState([]);
+
+  useEffect(() => {
+    if (!expenses || !Array.isArray(expenses)) return;
+
+    const aggregatedData = expenses.reduce((acc, { created_at, amount }) => {
+      const date = new Date(created_at);
+      if (isNaN(date)) return acc;
+
+      const key = date.toLocaleString("default", {
+        month: "short",
+        year: "numeric",
+      });
+      const numericAmount = parseFloat(amount);
+      if (!isNaN(numericAmount)) {
+        acc[key] = (acc[key] || 0) + numericAmount;
+      }
+
+      return acc;
+    }, {});
+
+    const chartData = Object.entries(aggregatedData).map(([name, amount]) => ({
+      name,
+      amount,
+    }));
+
+    setMonthlyData(chartData);
+  }, [expenses]);
+
+  if (loadBudget)
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <Loader />
+        <div>loading chart data..</div>
+      </div>
+    );
+  if (error) return <div>Error loading chart data: {error}</div>;
+  if (!monthlyData.length)
+    return <div>No expenses data available to display.</div>;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        width={500}
-        height={400}
-        data={data}
-        margin={{
-          top: 10,
-          right: 30,
-          left: 0,
-          bottom: 0,
-        }}
+        data={monthlyData}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
-        s
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+        <Area
+          type="monotone"
+          dataKey="amount"
+          stroke="#8884d8"
+          fill="#8884d8"
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
