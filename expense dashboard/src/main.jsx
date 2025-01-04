@@ -5,12 +5,12 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import Signup from "../src/pages/Signup.jsx";
-import Login from "./pages/Login.jsx";
+import Login from "../src/pages/Login.jsx";
 import { AuthContextProvider } from "./Hooks/authContext.jsx";
 import { DashboardContextProvider } from "./Hooks/dashboardContext.jsx";
-import ProtectedRoute from "./Hooks/protectedRoute.jsx";
-import Budget from "./pages/Budget.jsx";
-import Expense from "./pages/Expense.jsx";
+import ProtectedRoute from "./Hooks/ProtectedRoute.jsx";
+import Budget from "../src/pages/Budget.jsx";
+import Expense from "../src/pages/Expense.jsx";
 
 const router = createBrowserRouter([
   {
