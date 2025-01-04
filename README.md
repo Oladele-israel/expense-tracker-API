@@ -2,7 +2,7 @@
 Welcome to Limitless-Xpenx, the ultimate full-stack expense tracker application designed to redefine how you manage your finances. Whether you're budgeting for a vacation, tracking daily expenses, or analyzing monthly spending patterns, Limitless-Xpenx empowers you to take full control of your money in a limitless way.
 
 
-<img src="./assets/images/logo.png" alt="Project Logo" width="200" height="200" />
+<img src="./assets/images/limitless.png" alt="Project Logo" width="200" height="200" />
 
 🎯 What Makes Limitless-Xpenx Unique?
 AI-Powered Insights
