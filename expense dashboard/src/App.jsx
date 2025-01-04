@@ -1,6 +1,6 @@
-import AiSuggestion from "./components/AiSuggestion";
-import DashboardHeader from "./components/DashboardHeader";
-import Summary from "./components/Summary";
+import AiSuggestion from "./components/AiSuggestion.jsx";
+import DashboardHeader from "./components/DashboardHeader.jsx";
+import Summary from "./components/Summary.jsx";
 
 const App = () => {
   return (

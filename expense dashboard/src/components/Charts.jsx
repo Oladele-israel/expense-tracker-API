@@ -8,8 +8,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useDashboardContext } from "../Hooks/dashboardContext";
-import Loader from "./Loader";
+import { useDashboardContext } from "../Hooks/dashboardContext.jsx";
+import Loader from "./Loader.jsx";
 
 const Charts = () => {
   const { expenses, loadBudget, error } = useDashboardContext();
