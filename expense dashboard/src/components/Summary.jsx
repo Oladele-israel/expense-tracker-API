@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import FirstSummary from "./firstSummary";
-import paper from "../assets/images/paper.svg";
+import paper from "../assets/images/Paper.svg";
 import Graph from "../assets/images/Graph.svg";
 import Profile from "../assets/images/Profile.svg";
 import Charts from "./Charts";
